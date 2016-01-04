@@ -22,11 +22,20 @@ if ~isempty(tokenSetPath) && ~isdir(tokenSetPath)
 end
 
 %%
-hf = figure;
+hf = figure('Units', 'Normalized', ...
+            'Position', [0.1, 0.2, 0.8, 0.6]); 
+
+set(hf, 'Units', 'pixels');
+pPos = get(hf, 'Position');
+
+whRatio = pPos(3) / pPos(4);
+        
+yLim = [0, 1];
+xLim = [0, whRatio];
 
 bDone = false;
-set(gca, 'XLim', [0, 1]);
-set(gca, 'YLim', [0, 1]);
+set(gca, 'XLim', xLim);
+set(gca, 'YLim', yLim);
 
 recogWinners = {};
 bounds = {};
@@ -35,7 +44,7 @@ while ~bDone
     ys = get(gca, 'YLim');
     
     crd1 = ginput(1);
-    if crd1(1) < 0 || crd1(1) > 1 || crd1(2) < 0 || crd1(2) > 1
+    if crd1(1) < xLim(1) || crd1(1) > xLim(2) || crd1(2) < yLim(1) || crd1(2) > yLim(2)
         bDone = true;
         continue
     end
