@@ -55,7 +55,7 @@ while ~bDone
     yBnds = sort([crd1(2), crd2(2)]);
     
     bounds{end + 1} = [xBnds(1), yBnds(1), xBnds(2), yBnds(2)];
-    recogWinners{end + 1} = input('recogWinner = ', 's');
+    recogWinners{end + 1} = deblank(input('recogWinner = ', 's'));
     
     if isempty(strmatch(recogWinners{end}, tokenSet, 'exact'))
         error('Token name not found in token set');
